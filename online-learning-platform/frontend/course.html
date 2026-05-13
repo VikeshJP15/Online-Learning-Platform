@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>📘 Course Details</h1>
+
+    <div id="course-details"></div>
+
+    <button onclick="enrollCourse()">Enroll</button>
+
+    <h3>📊 Progress</h3>
+    <progress id="progressBar" value="0" max="100"></progress>
+    <p id="progressText">0% completed</p>
+
+    <h3>📚 Lessons</h3>
+
+    <label><input type="checkbox" onchange="updateProgress()"> Lesson 1</label><br>
+    <label><input type="checkbox" onchange="updateProgress()"> Lesson 2</label><br>
+    <label><input type="checkbox" onchange="updateProgress()"> Lesson 3</label><br>
+
+    <script src="script.js"></script>
+
+    <script>
+        const courses = [
+            { id: 1, title: "Java Basics", description: "Learn Java from scratch" },
+            { id: 2, title: "Spring Boot", description: "Build REST APIs" },
+            { id: 3, title: "Web Development", description: "HTML, CSS, JS" }
+        ];
+
+        const id = localStorage.getItem("selectedCourse");
+        const course = courses.find(c => c.id == id);
+
+        document.getElementById("course-details").innerHTML =
+            `<h2>${course.title}</h2><p>${course.description}</p>`;
+
+        function enrollCourse() {
+            let myCourses = JSON.parse(localStorage.getItem("myCourses")) || [];
+            myCourses.push(course);
+            localStorage.setItem("myCourses", JSON.stringify(myCourses));
+            alert("Enrolled Successfully!");
+        }
+
+        function updateProgress() {
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            let total = checkboxes.length;
+            let checked = 0;
+
+            checkboxes.forEach(cb => {
+                if (cb.checked) checked++;
+            });
+
+            let percent = Math.round((checked / total) * 100);
+
+            document.getElementById("progressBar").value = percent;
+            document.getElementById("progressText").innerText = percent + "% completed";
+
+            saveProgress(percent);
+        }
+
+        function saveProgress(percent) {
+            let id = localStorage.getItem("selectedCourse");
+            let progressData = JSON.parse(localStorage.getItem("progress")) || {};
+
+            progressData[id] = percent;
+
+            localStorage.setItem("progress", JSON.stringify(progressData));
+        }
+
+        window.onload = function () {
+            let id = localStorage.getItem("selectedCourse");
+            let progressData = JSON.parse(localStorage.getItem("progress")) || {};
+
+            let saved = progressData[id] || 0;
+
+            document.getElementById("progressBar").value = saved;
+            document.getElementById("progressText").innerText = saved + "% completed";
+        };
+    </script>
+
+</body>
+</html>
