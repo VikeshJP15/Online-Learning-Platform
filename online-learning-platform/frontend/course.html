@@ -1,85 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Course Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details | JavaLearn Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="course">
+    <header class="topbar">
+        <a class="brand" href="index.html">
+            <span class="brand-mark">J</span>
+            <span>JavaLearn Studio</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+            <a href="index.html#courses">Courses</a>
+            <a href="mycourses.html">My Courses</a>
+        </nav>
+    </header>
 
-    <h1>📘 Course Details</h1>
+    <main>
+        <section class="detail-drawer standalone" id="course-details">
+            <div class="detail-header">
+                <a class="icon-button" href="index.html#courses" aria-label="Back to courses">&larr;</a>
+                <div id="course-info"></div>
+            </div>
 
-    <div id="course-details"></div>
+            <div class="detail-layout">
+                <div class="lesson-panel">
+                    <div class="panel-title">
+                        <h3>Lesson progress</h3>
+                        <span id="progressText">0% completed</span>
+                    </div>
+                    <progress id="progressBar" value="0" max="100"></progress>
+                    <div id="lessonList" class="lesson-list"></div>
+                </div>
 
-    <button onclick="enrollCourse()">Enroll</button>
-
-    <h3>📊 Progress</h3>
-    <progress id="progressBar" value="0" max="100"></progress>
-    <p id="progressText">0% completed</p>
-
-    <h3>📚 Lessons</h3>
-
-    <label><input type="checkbox" onchange="updateProgress()"> Lesson 1</label><br>
-    <label><input type="checkbox" onchange="updateProgress()"> Lesson 2</label><br>
-    <label><input type="checkbox" onchange="updateProgress()"> Lesson 3</label><br>
+                <aside class="action-panel">
+                    <button class="button primary full" type="button" onclick="enrollCourse()">Enroll course</button>
+                    <a id="youtubeLink" class="button youtube full" href="#" target="_blank" rel="noopener">Start on YouTube</a>
+                    <p>Use this page when a course is opened directly from the catalog or from your saved courses.</p>
+                </aside>
+            </div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
-
-    <script>
-        const courses = [
-            { id: 1, title: "Java Basics", description: "Learn Java from scratch" },
-            { id: 2, title: "Spring Boot", description: "Build REST APIs" },
-            { id: 3, title: "Web Development", description: "HTML, CSS, JS" }
-        ];
-
-        const id = localStorage.getItem("selectedCourse");
-        const course = courses.find(c => c.id == id);
-
-        document.getElementById("course-details").innerHTML =
-            `<h2>${course.title}</h2><p>${course.description}</p>`;
-
-        function enrollCourse() {
-            let myCourses = JSON.parse(localStorage.getItem("myCourses")) || [];
-            myCourses.push(course);
-            localStorage.setItem("myCourses", JSON.stringify(myCourses));
-            alert("Enrolled Successfully!");
-        }
-
-        function updateProgress() {
-            let checkboxes = document.querySelectorAll("input[type='checkbox']");
-            let total = checkboxes.length;
-            let checked = 0;
-
-            checkboxes.forEach(cb => {
-                if (cb.checked) checked++;
-            });
-
-            let percent = Math.round((checked / total) * 100);
-
-            document.getElementById("progressBar").value = percent;
-            document.getElementById("progressText").innerText = percent + "% completed";
-
-            saveProgress(percent);
-        }
-
-        function saveProgress(percent) {
-            let id = localStorage.getItem("selectedCourse");
-            let progressData = JSON.parse(localStorage.getItem("progress")) || {};
-
-            progressData[id] = percent;
-
-            localStorage.setItem("progress", JSON.stringify(progressData));
-        }
-
-        window.onload = function () {
-            let id = localStorage.getItem("selectedCourse");
-            let progressData = JSON.parse(localStorage.getItem("progress")) || {};
-
-            let saved = progressData[id] || 0;
-
-            document.getElementById("progressBar").value = saved;
-            document.getElementById("progressText").innerText = saved + "% completed";
-        };
-    </script>
-
 </body>
 </html>
