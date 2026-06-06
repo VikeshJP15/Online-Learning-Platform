@@ -2,16 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Online Learning Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaLearn Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="topbar">
+        <a class="brand" href="index.html" aria-label="JavaLearn Studio home">
+            <span class="brand-mark">J</span>
+            <span>JavaLearn Studio</span>
+        </a>
 
-    <h1>🎓 Online Learning Platform</h1>
+        <nav class="nav-links" aria-label="Primary navigation">
+            <a href="#courses">Courses</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="mycourses.html">My Courses</a>
+        </nav>
+    </header>
 
-    <input type="text" id="search" placeholder="Search courses...">
+    <main>
+        <section class="hero-shell">
+            <div class="hero-copy">
+                <p class="eyebrow">Student Java learning platform</p>
+                <h1>Build real Java skills with guided courses, practice paths, and video lessons.</h1>
+                <p class="hero-text">Learn Java step by step from core syntax to Spring Boot APIs. Track your enrolled courses, save lesson progress, and jump straight into hand-picked YouTube learning resources.</p>
 
-    <div id="course-list"></div>
+                <div class="hero-actions">
+                    <a class="button primary" href="#courses">Explore courses</a>
+                    <a class="button ghost" href="mycourses.html">View my courses</a>
+                </div>
+            </div>
+
+            <aside class="hero-panel" aria-label="Learning summary">
+                <div>
+                    <span class="metric-label">Active tracks</span>
+                    <strong id="activeTracks">6</strong>
+                </div>
+                <div>
+                    <span class="metric-label">Saved progress</span>
+                    <strong id="savedProgress">0%</strong>
+                </div>
+                <div>
+                    <span class="metric-label">Enrolled</span>
+                    <strong id="enrolledCount">0</strong>
+                </div>
+            </aside>
+        </section>
+
+        <section class="section-toolbar" id="courses" aria-labelledby="coursesTitle">
+            <div>
+                <p class="eyebrow">Course catalog</p>
+                <h2 id="coursesTitle">Choose your next Java course</h2>
+            </div>
+
+            <div class="search-wrap">
+                <span aria-hidden="true">Search</span>
+                <input type="search" id="search" placeholder="Search Java, Spring, DSA..." autocomplete="off">
+            </div>
+        </section>
+
+        <section class="course-grid" id="course-list" aria-live="polite"></section>
+
+        <section class="detail-drawer" id="course-details" hidden>
+            <div class="detail-header">
+                <button class="icon-button" type="button" onclick="backToCourses()" aria-label="Back to course list">&larr;</button>
+                <div id="course-info"></div>
+            </div>
+
+            <div class="detail-layout">
+                <div class="lesson-panel">
+                    <div class="panel-title">
+                        <h3>Lesson progress</h3>
+                        <span id="progressText">0% completed</span>
+                    </div>
+                    <progress id="progressBar" value="0" max="100"></progress>
+                    <div id="lessonList" class="lesson-list"></div>
+                </div>
+
+                <aside class="action-panel">
+                    <button class="button primary full" type="button" onclick="enrollCourse()">Enroll course</button>
+                    <a id="youtubeLink" class="button youtube full" href="#" target="_blank" rel="noopener">Start on YouTube</a>
+                    <p>Course progress is saved in this browser so students can return later.</p>
+                </aside>
+            </div>
+        </section>
+
+        <section class="roadmap" id="roadmap" aria-labelledby="roadmapTitle">
+            <div>
+                <p class="eyebrow">Recommended path</p>
+                <h2 id="roadmapTitle">From beginner to job-ready Java</h2>
+            </div>
+            <ol class="roadmap-list">
+                <li><span>01</span>Java fundamentals and object-oriented programming</li>
+                <li><span>02</span>Collections, exceptions, file handling, and JDBC</li>
+                <li><span>03</span>Spring Boot REST APIs with database integration</li>
+                <li><span>04</span>Projects, deployment basics, and interview practice</li>
+            </ol>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
