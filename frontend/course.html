@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details | JavaLearn Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="course">
+    <header class="topbar">
+        <a class="brand" href="index.html">
+            <span class="brand-mark">J</span>
+            <span>JavaLearn Studio</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+            <a href="index.html#courses">Courses</a>
+            <a href="mycourses.html">My Courses</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="detail-drawer standalone" id="course-details">
+            <div class="detail-header">
+                <a class="icon-button" href="index.html#courses" aria-label="Back to courses">&larr;</a>
+                <div id="course-info"></div>
+            </div>
+
+            <div class="detail-layout">
+                <div class="lesson-panel">
+                    <div class="panel-title">
+                        <h3>Lesson progress</h3>
+                        <span id="progressText">0% completed</span>
+                    </div>
+                    <progress id="progressBar" value="0" max="100"></progress>
+                    <div id="lessonList" class="lesson-list"></div>
+                </div>
+
+                <aside class="action-panel">
+                    <button class="button primary full" type="button" onclick="enrollCourse()">Enroll course</button>
+                    <a id="youtubeLink" class="button youtube full" href="#" target="_blank" rel="noopener">Start on YouTube</a>
+                    <p>Use this page when a course is opened directly from the catalog or from your saved courses.</p>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
